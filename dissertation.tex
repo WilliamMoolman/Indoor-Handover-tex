@@ -1,15 +1,31 @@
 % UG project example file, February 2022
 % Do not change the first two lines of code, except you may delete "logo," if causing problems.
 % Understand any problems and seek approval before assuming it's ok to remove ugcheck.
+\RequirePackage{silence}
+\WarningFilter{latex}{Command \under}
 \documentclass[logo,bsc,singlespacing,parskip]{infthesis}
+\usepackage{todonotes}
+\todostyle{red}{color=red,shadow}
+\usepackage{hyperref}
 \includeonly{src/background}
 \usepackage{ugcheck}
+% \usepackage[hyphens]{url}
+% \usepackage{silence}
+\WarningFilter{microtype}{Unable to apply}
+\WarningFilter{todonotes}{The length}
+
 
 % Include any packages you need below, but don't include any that change the page
 % layout or style of the dissertation. By including the ugcheck package above,
 % you should catch most accidental changes of page layout though.
 
 \usepackage{microtype} % recommended, but you can remove if it causes problems
+\usepackage[square,numbers]{natbib}
+\usepackage{graphicx}
+\usepackage{wrapfig}
+
+\newcommand*{\ab}{\textcolor{orange}}
+\usepackage{soul}
 
 \begin{document}
 
@@ -21,7 +37,10 @@
 
 \include{src/conclusions}
 
-\bibliographystyle{plain}
+
+\bibliographystyle{abbrvnat}
+
+% \bibliographystyle{plain}
 \bibliography{references}
 
 
