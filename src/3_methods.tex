@@ -129,3 +129,20 @@ for the default setup, $\text{Of}=0$ and $\text{Oc}=0$
 
 \item We see higher than expected spikes in RSRP caused by the walking, many of which are higher than the 3dBm need to trigger handover
 \item \end{itemize}
+
+\subsection{Handover Impact}
+\begin{itemize}
+    \item To determine the actual impact of a handover we must measure it quantatively
+    \item We run a ping flood from the UE to the EPC, and capture the packets using tcpdump
+    \item These are analysed with Wireshark to see the latency of each packet. We find the max of  these over a 2ms rolling window 
+    \item The results are shown in Figure \ref{fig:methods:ping-handover}
+\begin{figure}
+    \centering
+    \includegraphics[width=0.75\linewidth]{src//img/ping-handover.png}
+    \caption{Wireshark view of Ping during a handover event}
+    \label{fig:methods:ping-handover}
+\end{figure}
+
+\item We see a large latency spike during the handover event
+\item However, no packets are dropped due to the EPC/eNB buffering any packets received during HO. (Soft Handover)
+\end{itemize}
