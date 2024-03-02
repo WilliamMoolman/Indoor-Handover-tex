@@ -7,7 +7,8 @@
 \usepackage{todonotes}
 \todostyle{red}{color=red,shadow}
 \usepackage{hyperref}
-\includeonly{src/background}
+\usepackage{amsmath}
+% \includeonly{src/background}
 \usepackage{ugcheck}
 % \usepackage[hyphens]{url}
 % \usepackage{silence}
@@ -29,13 +30,19 @@
 
 \begin{document}
 
-\include{src/preliminary}
+\include{src/0_preliminary}
 
-\include{src/intro}
+\include{src/1_intro}
 
-\include{src/background}
+\include{src/2_background}
 
-\include{src/conclusions}
+\include{src/3_methods}
+
+\include{src/4_discussion}
+
+\include{src/5_results}
+
+\include{src/6_conclusions}
 
 
 \bibliographystyle{abbrvnat}
