@@ -1,13 +1,27 @@
 \chapter{Introduction}
+Mobile networks are increasingly looking to serve consumers in indoor environments \insertref; however, there exists a gap in research on the performance of networks in indoor environments, particularly looking at the handover process, the process which attempts to connect each mobile cell to the best radio transceiver - the best primarily being determined through metrics such as Quality of Service (QoS) and Quality of Experience (QoE). In outdoor environments, the algorithms underpinning this handover process are well understood and tested \insertref. However, assuming such algorithms will perform similarly in indoor environments is naive.
+
+Recent studies have examined the performance of 5G handovers, focusing on outdoor environments. The complexity of the indoor environment, influenced by much narrower propagation ranges and high signal loss due to Line of Sight (LOS) blockages and high radio absorption from obstacles and walls, presents unique challenges \insertref.
+
+Factors such as signal reflection, refraction, and absorption by walls and obstacles complicate indoor handover processes. These challenges necessitate sophisticated solutions that can dynamically adapt to changing indoor conditions. We propose the use of machine learning algorithms, capable of processing complex signal patterns, to improve handover efficiency and reliability \insertref
+
+This paper aims to understand said handover process, contrast the performance to similar outdoor scenarios, and provide recommendations for possible algorithm improvements or adjustments to serve the indoor environment better. To perform said analysis, real-world experiments must be performed, and the physical signals must be captured for analysis to be reliable. For many papers exploring outdoor scenarios, simulations are used instead of real-world setups due to the complexity of maintaining a radio network, as well as the relatively high costs of equipment. Later in the paper, we face similar roadblocks and document our various steps.
+
+\textbf{Clarified Objectives:} This research aims to:
 \begin{itemize}
-    \item Mobile networks are increasingly looking to serve consumers in indoor environment.
-    \item Classic algorithms developed in outdoor environments will not necessarily translate to indoors
-    \item Simulation data works well for investigating outdoors as propogation loss can be simulated
-    \item Indoors must be gathered using real world data for analysis to be relevant
-    \item Mainting a stable testbed is non-trivial. The research group has a testbed but much must be done to gather such data
-    \item Using srsRAN is best due to its logging verbosity
-    \item Using Mobile UEs is good for accuracy, but data cannot be dumped from proprietary chips
-    \item Laptop + USRP works best
-    \item Previous studies do not exist
-    \item 
+    \item Analyze the performance of existing handover algorithms in indoor environments.
+    \item Evaluate the efficacy of machine learning techniques in predicting and facilitating seamless handovers.
+    \item Propose adjustments or new algorithms designed to enhance Quality of Service (QoS) and Quality of Experience (QoE) in indoor 5G networks.
 \end{itemize}
+
+The study will conduct real-world experiments in various indoor settings to collect signal data to achieve these objectives. This data will then be used to train machine learning models to predict optimal handover moments and select the best target cell with greater accuracy than traditional algorithms \insertref.
+
+Simulations can be used in outdoor environments, as modelling the radio characteristics in a free air space is much easier, using techniques such as propagation loss algorithms such as shadow-log loss \insertref compared to modelling the radio absorption and reflection\todo{or refraction?} of walls, obstacles and dynamic objects such as human movement, which will deviate significantly from reality. Furthermore, studies that demonstrate the use of such simulations inherently prioritise the outdoor accuracy of said simulations. 
+
+Understanding indoor handovers is critical as it affects user experience significantly, especially with the increased demand for high-bandwidth applications \insertref. This paper aims to explore the impact of handovers on throughput and connectivity, as well as the frequency of handovers, and to determine whether all occurring handovers are necessary. 
+
+This paper's findings highlight the need for more careful setup and handling of indoor handovers and pave the way for more extensive real-world research. They also pave the way for subsequent exploratory studies that analyse other indoor cellular network performance aspects. Ultimately, this work aims to enhance connectivity and service reliability in indoor environments, addressing the evolving needs of mobile network users.
+
+In conclusion, this paper aims to significantly contribute to understanding and improving indoor handover processes in 5G networks, addressing theoretical and practical challenges through the lens of machine learning and signal processing.
+
+% Currently at 2 pages, attempt to expand to 3-4
