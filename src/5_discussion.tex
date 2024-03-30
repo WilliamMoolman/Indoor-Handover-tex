@@ -1,0 +1,80 @@
+\chapter{Discussion}
+
+\section{Interpretation of Findings}
+\subsection{Adherence to LTE Standards and Simulation Limitations}
+Our study begins with a simulation of an LTE network using srsRAN, ZMQ and GNU Radio. Through this simulation, we confirmed srsRAN's adherence to the LTE standard during handover. We found that the hysteresis parameter behaves as expected, while TTT was not explored due to the limitations in data collection from the simulation. While useful for our understanding of handover, this study was limited in furthering our understanding of indoor environments due to the lack of realistic models for constrained environments. This prompted us to use a LTE testbed to gather real-world data for analysis.
+
+\subsection{Insights from Custom Network Simulator}
+While the srsRAN provided a standards-conforming implementation of LTE, we can build a custom simulation that cannot emulate a real network but can instead be used to gather data on handover behaviour in large-scale systems. This allowed us to find a clear link between the hysteresis parameter and the ping-pong rate, with a minor relation to the TTT trigger. This result was expected from the background \insertref; nevertheless, it reinforced our understanding and focused on real-world experimentation of testing different hysteresis parameters.
+
+Similar to the srsRAN simulation, this network simulator was heavily limited by the simulation model; in this case, it used the log-shadow loss propagation model -- which would not account for many of the indoor influences, such as LOS blockage, signal reflections or angle of arrival. The approximation of human movement further limited it, so the experiment's results are only intended as a reference for further experimentation.
+
+\subsection{Real-World Network Testbed Observations}
+Our focus of the paper was on real-world network testbed observations. 
+
+Our initial experimentation focused on basic mobility tests in two eNB scenarios. Here, we saw expected behaviour in a walking scenario; RSRP decreased proportionally to the distance to the eNBs and the UE, which triggered a handover once an UE moved closer to another eNB. 
+
+However, the other three experiments deviated from expectations. Our static setup showed large spikes in RSRP with no explainable cause, leading us to believe that indoor signals are inherently less stable than outdoor transmission. We can hypothesise that this is due to the highly constrained environment, which leads to greater-than-expected second-order transmission avenues, such as signal reflections, and the high proximity of UE and eNB.
+
+A rotating UE again deviated from expectations of a constant RSRP value, where RSRP had heavy fluctuations, leading to multiple handovers. Our LOS blockage experiment also had extremely high fluctuations in signal strength. From these experiments, we can hypothesise that further experiments will exhibit a high handover rate and that higher hysteresis values might be required -- alongside an increase in difficulty interpreting our experimentation results.
+
+We conducted further experiments on the latency and throughput impacts of handover. We chose UDP as a transmission protocol over TCP because it highlights our network's maximum throughput better. The latency induced by a handover was measured as a 95ms increase in RTT using the \texttt{ping} and \texttt{Wireshark} tools. Handover did not show the predicted drop in throughput. Instead, the network was characterised by handovers causing connection drops or reconnections. This indicates that the handovers, in scenarios with poor network resilience, should be minimised due to the risk of a connection failure.
+
+Increasing the number of eNBs caused the issues encountered in two eNB setups to worsen drastically. There was a high handover rate even in stationary environments. From this, we conclude that indoor environments should try to minimise cell density, especially if the stationary signal fluctuations are reproduced in the deployment environment.
+
+We finally performed an experiment examining the hysteresis threshold. This followed expectations, where increasing the hysteresis parameter monotonically reduced the number of handovers. Due to the instability of RSRP exhibited in earlier examinations, we can recommend higher hysteresis values be chosen for indoor environments.
+
+\section{Implications and Applications}
+\subsection{Impact on Network Design and Management}
+We can provide preliminary recommendations for network design and management from the experiments run in simulated environments and real-world testbeds. These recommendations should not be utilised naively—instead, they are meant to provide a starting point for further research and experimentation in both the field and individual deployments.
+
+\begin{itemize}
+    \item Handover rate should be minimised in unreliable networks. As connections dropped often in our network during a handover event, the handover rate should be minimised to reduce the risk of a connection failure. Alternatively, the network robustness to handover failures must be prioritised to account for the high handover rate experienced due to RSRP fluctuations.
+    \item High hysteresis values are preferred. A high hysteresis threshold can mitigate signal fluctuations, helping reduce handover. A hysteresis value that is too high could cause a device not to prioritise the closest eNB; however, in indoor deployments, the density of cells causes this to be less of an issue.
+    \item Cell density should be minimised where possible. The RSRP fluctuations experienced cause the handover rate to scale with cell density. Increasing the distance between cells will lead to a lower handover rate.
+\end{itemize}
+
+% \subsection{Practical Applications in LTE Networks}
+% \begin{itemize}
+%     \item Discuss potential applications of the findings for improving handover mechanisms in LTE networks to enhance user experience and network stability.
+%     \item Evaluate the role of handover parameters, like hysteresis, in optimizing network performance and minimizing disruptive transitions.
+% \end{itemize}
+
+\section{Limitations of the Study}
+\subsection{Simulation Constraints}
+As mentioned above, we experienced limitations in our simulation due to the signal modelling. The srsRAN simulation modelled the signal propagation loss using a constant attenuation we manually controlled, while the custom network simulator used the log-shadow propagation loss. While this approximates the signal attenuation in free space, it does not account for any other effect caused by the indoor environment.
+
+These limitations were, however, well understood and did not detract from the insights we gained. It did, however, limit the results of both experiments, instead using the experiments to guide our real-world testing. Further, more complex models could be used, such as the WINNER \insertref model, to approximate a narrow environment better, but this would be better suited to later development and testing work; exploratory work should only be done on real-world systems.
+
+\subsection{Controlled Environment in Real-World Testing}
+Our lab testbed provided realistic results; however, our experiments had critical limitations due to the environment's controlled nature. We only conducted experiments in a rectangular room with fixed eNB positions. This highly limited the number of experiments that could be done, such as testing the impact of moving around corners indoors, moving through doorways and testing the effects of differing wall materials such as glass, wood and concrete. This limited our study to look at the effect of a constrained environment, albeit with the dynamic aspects induced by human movement.
+
+Further testing would need to be done in more variable and realistic conditions.
+
+\subsection{Network reliability}
+The final key limitation of the study was the lack of network resilience. Network failures were very common, as radio communication is inherently unreliable, requiring a much greater number of testing hours to extract useful data. This may also be a confounding factor in our results, where fluctuations in throughput and signal could be attributed to network instability rather than a product of the environment. To validate the results of this experiment, repeated testing on alternative hardware setups and different labs would be required.
+
+\section{Future Work}
+Much is needed to be done to further the studies starting in this paper, as the results of this paper are intended as a starting point for further research. We suggest four different avenues of research for later works.
+
+\subsection{Improving Simulation Realism}
+The first avenue is to utilise better simulation models. The WINNER uMA \insertref model, in particular, was developed for dense urban environments and so could be suited to emulate indoor environments with some modifications. Furthermore, human movement algorithms were developed to emulate outdoor movement, so they must be redeveloped to emulate indoor movement.
+
+Finally, the custom simulator built uses an approximation of a mobility management unit, which will not necessarily conform to LTE standards and could deviate from what a real handover process would look like. We can account for this by integrating srsRAN into this simulator, using ZMQ to communicate between UEs, and controlling attenuation from the calculated propagation loss.
+
+To further increase simulation accuracy, we can use real-world hardware, albeit with software-defined attenuation rather than over-the-air radio communication, by utilising the POWDER platform.
+
+
+\subsection{Extensive Real-World Experimentation}
+Our current real-world studies are done in a single environment with a single testbed. More extensive studies are required to explore a diverse set of environments to gain a more comprehensive understanding of indoor network behaviour. We have devised a list of alternative environments we hope to test in further studies:
+\begin{description}[style=unboxed]
+    \item[\textbf{Non-convex Rooms}] Our testing was constrained to a rectangular room. To better understand the effects of LOS blockage due to the physical room, we would require testing in non-convex rooms, such as L-shaped rooms, alcoves or non-straight corridors. This would allow testing and contrasting different eNB placements.
+    \item[\textbf{Multi-room Deployments}] To better understand how moving through doorways impacts network performance, multi-room deployments are essential, i.e. have eNB based in multiple rooms. This is very important for indoor testing, as we can hypothesise that moving between rooms is a required handover event, which we do not want to suppress with our above strategies.
+    \item[\textbf{Material Impact}] As we have tested in a single environment, we wish to test in an environment with different floor, ceiling and wall materials. This would allow us to test whether specific materials impact the network quality more than others, e.g. is there less signal attenuation through glass or drywall rather than a brick wall, or whether specific wall materials reduce signal reflection.
+\end{description}
+
+\subsection{Exploring Alternative Technologies and Protocols}
+Finally, although this paper was incepted due to the forecasted deployment of 5G in an indoor environment, the experiments performed were done using LTE networks. This choice was made as srsRAN, our software stack, has a much more mature LTE implementation. We, therefore, believe that while our results are applicable due to the shared utilisation of the open-air radio communication, repeating these experiments with a 5G stack could yield further insights. This is due to the higher frequency used by 5G networks having different radio properties, for instance higher frequencies experience much higher signal absorption, and propagation loss.
+
+\subsection{Predictive Handover}
+Predictive handover is a vital goal for indoor deployments, allowing handover to be triggered before signal quality degrades. This goal is out-of-scope for this project, but we believe it to be a key area of research in the future. Drawing from the extensive literature on using Machine Learning in outdoor handover \insertref, we believe this to be a powerful tool for developing indoor handover, however due to the noisy signals seen in experimentation, we believe that this would require additional heuristics than the existing algorithms.

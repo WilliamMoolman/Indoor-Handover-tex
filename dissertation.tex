@@ -9,14 +9,19 @@
 \usepackage{hyperref}
 \usepackage{amsmath}
 \usepackage{subcaption}
-% \includeonly{src/background}
+% \includeonly{src/6_conclusions}
 \usepackage{ugcheck}
+% \usepackage{draftwatermark}
 % \usepackage[hyphens]{url}
 % \usepackage{silence}
+\usepackage{enumitem}
+
+
+% \usepackage[automake]{glossaries-extra}
 \WarningFilter{microtype}{Unable to apply}
 \WarningFilter{todonotes}{The length}
-
-
+\WarningFilter{latex}{Marginpar on page}
+ % :0
 \usepackage{microtype} % recommended, but you can remove if it causes problems
 \usepackage[square,numbers]{natbib}
 \usepackage{graphicx}
@@ -26,6 +31,10 @@
 \newcommand{\insertref}{\todo[color=green!40,size=\small, inlinewidth=0.5cm,inline, noinlinepar]{?}}
 \newcommand{\tocomplete}[1]{\todo[color=blue!40]{#1}}
 \usepackage{soul}
+
+\usepackage[acronym,nonumberlist]{glossaries}
+\makeglossaries
+
 
 \begin{document}
 
@@ -39,11 +48,9 @@
 
 \include{src/4_experimentation}
 
-\include{src/5_synthesis_of_findings}
+\include{src/5_discussion}
 
-\include{src/6_future_directions}
-
-\include{src/7_conclusions}
+\include{src/6_conclusions}
 
 \listoftodos
 
@@ -56,7 +63,9 @@
 % You may delete everything from \appendix up to \end{document} if you don't need it.
 \appendix
 
-\include{src/appendix_A}
+\include{src/A_glossaries}
+
+% \printglossaries
 
 
 \end{document}
@@ -64,16 +73,15 @@
 %%%%%%%%%%%%%%%%%%% NOTES %%%%%%%%%%%%%%%%%%%%%%%%%
 You can use the following rough page count estimate to distribute content across a 40-page dissertation while ensuring each section is adequately addressed. This distribution considers the typical depth and detail required for each section in a comprehensive study like yours on "Understanding 5G Handover through Machine Learning and Signal Processing."
 
-[2] Introduction (3-4 pages): Introduce the topic and outline the study's research gap, objectives, and significance. Given the topic's complexity, enough space is needed to set the stage for your research.
+[3] Introduction (3-4 pages): Introduce the topic and outline the study's research gap, objectives, and significance. Given the topic's complexity, enough space is needed to set the stage for your research.
 
-[6(5.3)] Background (5-6 pages): Provide a detailed literature review and theoretical framework for 5G, handover processes, machine learning, and signal processing. This section establishes the foundation for your research.
+[6] Background (5-6 pages): Provide a detailed literature review and theoretical framework for 5G, handover processes, machine learning, and signal processing. This section establishes the foundation for your research.
 
-[5(4.2)] Exploratory Research Design (5-6 pages): Describe the methodology in detail, including the design of your exploratory research, the selection of machine learning models, data collection methods, and the rationale behind your choices. This section must be thorough to ensure the validity and reliability of your research.
+[5] Exploratory Research Design (5-6 pages): Describe the methodology in detail, including the design of your exploratory research, the selection of machine learning models, data collection methods, and the rationale behind your choices. This section must be thorough to ensure the validity and reliability of your research.
 
-[8(7)] Experimentation (10-12 pages): Detail the experimental setup, the implementation of machine learning techniques, the processing of signal data, and the analysis performed. Given that this is the core of your research, it should be the most detailed, comprehensively documenting your experiments and initial findings.
+[14] Experimentation (20 pages): Detail the experimental setup, the implementation of machine learning techniques, the processing of signal data, and the analysis performed. Given that this is the core of your research, it should be the most detailed, comprehensively documenting your experiments and initial findings.
 
-[1(0)] Synthesis of Findings (6-7 pages): Present the results of your experiments, interpret the data, and discuss how your findings address the research questions or hypotheses. This section synthesizes the data collected with the literature reviewed to draw meaningful conclusions about indoor handover processes.
+[4] Discussion (6-7 pages): Present the results of your experiments, interpret the data, and discuss how your findings address the research questions or hypotheses. This section synthesizes the data collected with the literature reviewed to draw meaningful conclusions about indoor handover processes.
 
-[1(0)] Future Directions (3-4 pages): Based on your findings, suggest areas for future research, potential improvements in technology or methodology, and how your work could be expanded or applied in other contexts. This section highlights the significance of your work and its implications for future studies.
 
-[1(0)] Conclusions (2-3 pages): Summarize the key findings of your research, its limitations, and the practical implications for 5G network development and optimization. This section concisely encapsulates the essence and impact of your study.
+[2] Conclusions (2-3 pages): Summarize the key findings of your research, its limitations, and the practical implications for 5G network development and optimization. This section concisely encapsulates the essence and impact of your study.

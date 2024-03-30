@@ -1,0 +1,24 @@
+\chapter{Glossary}
+\newcommand{\acronym}[2]{\newacronym[sort=#1]{#1}{#1}{#2}}
+
+\textcolor{orange}{eNB refers to LTE which surprisingly 4G and LTE are not the same protocol \url{https://www.uctel.co.uk/blog/4g-vs-lte-understanding-the-difference-between-4g-and-lte}. enB means evolved Node B (eNB)- LTE base station.
+next-generation Node B (gNB)
+User Equipment (UE)}
+
+\acronym{eNB}{A 4G base station, a radio transceiver that provides the radio connection to the UE}
+\acronym{UE}{Any mobile device that can connect to the mobile network as a client}
+\acronym{LOS}{Line of Sight}
+\acronym{gNB}{A 5G base station}
+\acronym{ML}{Machine Learning}
+\acronym{HOPP}{Handover Ping Pong}
+\acronym{HOF}{Handover Failure}
+\acronym{HO}{Handover}
+\acronym{RSRP}{Reference Signal Receiver Power - a measure of signal quality}
+\acronym{SINR}{Signal-to-Interference-plus-Noise Ratio}
+\acronym{RSRQ}{Reference Signal Receiver Quality - a measure of signal quality}
+\acronym{CQI}{Channel Quality Indicator}
+\acronym{PCI}{Physical Cell Index - a value representing a physical cell}
+
+\glsaddall
+\renewcommand{\glossarysection}[2][]{}
+\printglossary[type=\acronymtype]

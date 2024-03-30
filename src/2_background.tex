@@ -11,7 +11,7 @@ RSRP is correlated with data throughput, and we want to maximise RSRP to maximis
     \item The source BS will compare the measured RSRP metrics and decide whether to initiate a Handover. This decision is made with various algorithms discussed in \ref{sec:algorithms}, but all focus on maximising the UE's QoS by handing the connection over to a BS with a higher RSRP.
     \item If the BS initiates handover, it will determine which neighbouring BS to transfer the connection to. Various protocols determine how a connection is transferred; however, this is outside this paper's scope. Regardless of the protocol used, there will be a drop in connectivity and throughput.
     \item The connection between a UE and the source BS can drop if the handover is not triggered before the RSRP drops below a level where communication is possible. This is termed handover failure (HOF), which has a much greater impact on connectivity and must be minimised.
-    \item Handover decisions are not always optimal; an UE transferred to a neighbouring BS could be transferred back to the source BS if the RSRP values are unstable. This results in two unneeded handovers, decreasing QoS and increasing server load. This is termed Handover Ping Pong (HOPP), as it must be minimised.
+    \item Handover decisions are not always optimal; a UE transferred to a neighbouring BS could be transferred back to the source BS if the RSRP values are unstable. This results in two unneeded handovers, decreasing QoS and increasing server load. This is termed Handover Ping Pong (HOPP), as it must be minimised.
 \end{enumerate}
 
 \subsection{Indoor Environments}
@@ -40,12 +40,12 @@ The standard approach towards handover uses two parameters, \textit{Hysteresis} 
 \clearpage %============================= CLEAR PAGE  =====================================%
 
 \subsection{Alternative Heuristics}
-The majority of existing handover algorithms use relative RSRPs (such as Hysteresis) with some delay (such as Time to Trigger). Other parameters suggested and modelled in the literature are throughput, location, load balancing, user velocity, service delay, and distance. \cite{nyangaresi_efficient_2022}.
+Most existing handover algorithms use relative RSRPs (such as Hysteresis) with some delay (such as Time to Trigger). The literature suggests and models other parameters, including throughput, location, load balancing, user velocity, service delay, and distance. \cite{nyangaresi_efficient_2022}.
 
 \citet{hatipoglu_handover-based_2020} presented a handover-based load balancing algorithm for HetNets. The paper utilised UE speeds in determining handover, which is an unrealistic metric to obtain in practice. The algorithm itself is pretty simplistic, and while the paper showed promising results, the algorithm does not consider critical metrics such as RSRP or connection speed.
 
 \subsection{Machine Learning}
-Seeing handover as an optimisation problem, using machine learning (ML) to solve the handover problem is natural. For this reason, ML techniques are appealing to provide better performance than the more naive algorithms. As ML techniques do not require a model of the environment, this is especially applicable to indoor environments, where modelling proves difficult.
+Seeing handover as an optimization problem, using machine learning (ML) to solve it is natural. ML techniques are appealing because they provide better performance than the more naive algorithms. As ML techniques do not require a model of the environment, this is especially applicable to indoor environments, where modelling proves difficult.
 
 ML algorithms can be subdivided into supervised, unsupervised and reinforcement learning. Supervised and unsupervised algorithms perform regression or classification on a set of inputs. Reinforcement learning is based on the idea that the algorithm will learn to maximise its rewards in a given environment by learning the optimal policy. In our case, the optimal policy is a sequence of handover decisions that maximise throughput while minimising HOF and HOPP. The use of reinforcement learning has been surveyed in \cite{mollel_survey_2021}.
 
@@ -58,22 +58,17 @@ Reinforcement learning is a broad grouping of algorithms. These include Multi-Ar
 \section{Handover Testbeds}
 To evaluate experimental algorithms, we need some way to emulate a network. Many authors run custom simulations using propagation algorithms to model path loss and simulate the network devices. A better method is using a software radio suite as a testbed. This allows us to emulate UEs, base stations (BSs), and the core network (CN).
 
-A few options are available, with the major software being srsRAN, OpenAirInterface, and Aether. This paper chose srsRAN due to its clear open-source code and extensive tutorials. While a fully custom testbed allows for greater flexibility, the realistic nature of using software radio suites will give results that much better reflect how the algorithms would perform in a real-world scenario and, so, arguably, give more useful results.
+A few options are available, with the significant software being srsRAN, OpenAirInterface, and Aether. This paper chose srsRAN due to its clear open-source code and extensive tutorials. While a fully custom testbed allows for greater flexibility, the realistic nature of using software radio suites will give results that much better reflect how the algorithms would perform in a real-world scenario and, so, arguably, provide more useful results.
 
-\citet{powell_handover_2021} presented a testing framework for 4G experiments using srsRAN and performed basic experiments. The framework was presented clearly, and I was able to replicate the results of their simulation. The experiments they performed, however, were limited as signal strength was arbitrarily introduced by attenuating a signal and did not utilise signal propagation algorithms.
-
-% 3.5 pages, need to expand to maybe 7?
+\citet{powell_handover_2021} presented a testing framework for 4G experiments using srsRAN and performed basic experiments. The framework was presented clearly, and we were able to replicate the results of their simulation. The experiments they performed, however, were limited as signal strength was arbitrarily introduced by attenuating a signal and did not utilise signal propagation algorithms.
 
 \section{Previous Work}
-\tocomplete{Expand previous work}
-\begin{itemize}
-    \item \url{https://eudl.eu/pdf/10.1007/978-3-030-05195-2_39}
-    \item \url{https://www.researchgate.net/publication/356947198_Evaluating_Handover_Performance_for_End-to-End_LTE_Networks_with_OpenAirInterface}
-    \item \url{https://indjst.org/download-article.php?Article_Unique_Id=INDJST2579&Full_Text_Pdf_Download=True}
-    \item \url{https://dl.acm.org/doi/pdf/10.5555/3466184.3466549}
-    \item \url{https://arxiv.org/pdf/2307.14152.pdf}
-    \item \url{https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=6214116&tag=1}
-\end{itemize}
+
+\citet{sucasas_simulation_2019} explores the effect of cell size on various HO \textcolor{orange}{I know that HO is in the list of acronyms but it is good that the first time you use Handover (HO)} metrics, such as HOPP and HOF. This paper is interesting as certain aspects of indoor handover are similar to ultra-small cell deployment. \textcolor{orange}{consider replacing this sentence to This paper tackles handover in ultra-small cell deployments which have similarities to indoor settings.} However, the results were achieved through simulation, which does not account for the various secondary effects of indoor scenarios mentioned above \textcolor{orange}{move this sentence to the end of the paragraph}. The paper's results show a highly significant increase in ping-pong rates and HOF for cells with a smaller than 200m Inter-Site Distance (ISD) - the distance between two eNBs- leading us to conclude similar problems in our indoor scenario.
+
+\citet{bertolini_evaluating_2021} presents a real-world experimental setup using OpenAirInterface and conducts various experiments to understand handover impact. However, this paper does not translate well to our domain, as physical cabling connects to each cell instead of a radio transceiver. This limits the results of their experiment, as no second-order effects are seen (LOS blockage, signal reflection and open-air propagation loss). The paper does present various methodologies that we utilise in our setup; the paper uses the `iperf` tool to generate UDP traffic to measure throughput, something we replicate \textcolor{orange}{not sure if this is a good place to write this sentence, maybe in the discussion section? }. The paper also outlines the handover protocol in an easy-to-understand way, which aids us in our understanding. \textcolor{orange}{You need to write the conclusion of the paper that you are citing.}
+
+\citet{zhang_performance_2012} presents an in-depth study on the impact of handover on TCP and UDP traffic. Their experiments used a similar cabled setup as \citep{bertolini_evaluating_2021} for their first experiments but used an outdoor testbed for the latter. The paper found a clear relationship between the hysteresis value and HO rate; however, it found no impact on TCP traffic. It further measured the latency introduced by a handover to be 80ms, a value we reproduce in Section \ref{sec:handover-impact}.
 
 \section{Further Technologies}
 When examining the directions for this paper, three possible technologies should be reviewed as they strongly relate to either handover performance or experimentation. 
@@ -81,38 +76,26 @@ When examining the directions for this paper, three possible technologies should
 \subsection{Reactive vs Predictive Handover}
 There are two main strategies when dealing with handover. We can either react to degraded quality and handover to improve it, or we can predict when quality is about to degrade and handover to maintain the quality of the connection.
 
-\subsubsection*{Reactive Handover} This is the traditional handover mechanism where the decision to switch from one cell to another is made based on current signal strength and quality. This relies on a more static environment where no sudden drops in signal connection occur, as if a connection falls below a certain threshold, the cell cannot communicate the degraded connection to the eNB base station and must perform a reconnection to the network -- a Handover Failure. This also relies on real-time signal metrics, as a delayed response to a falling signal strength could result in a Handover Failure. While drawbacks exist when there is not a long enough window to react in, it is a much simpler algorithm to implement, and so is chosen for the majority of outdoor handover scenarios, with the exception of high-speed movement applications such as railways \cite{Kosmopoulos2022Handover} as well as other dynamic environments.
+\subsubsection*{Reactive Handover} This is the traditional handover mechanism where the decision to switch from one cell to another is made based on current signal strength and quality. This relies on a more static environment where no sudden drops in signal connection occur, as if a connection falls below a certain threshold, the cell cannot communicate the degraded connection to the eNB base station \textcolor{orange}{i do not understand, is not cell the same as eNB?}. It must perform a reconnection to the network -- a Handover Failure \textcolor{orange}{I do not get the point of this, could you re-explain it?}. This also relies on real-time signal metrics, as a delayed response to a falling signal strength could result in a Handover Failure. While drawbacks exist when there is not a long enough window to react, it is a much simpler algorithm to implement. It is chosen for most outdoor handover scenarios, except for high-speed movement applications such as railways \cite{kosmopoulos_handover_2022} and other dynamic environments.
                 
-\subsubsection*{Predictive Handover} Predictive handover instead attempts to predict when signal quality is about to drop and initiates handover before the signal quality drops below a certain threshold. It aims to minimize disruption and enhance the user experience by anticipating network conditions \cite{Al-Quraan2023Enhancing}. This avoids Handover Failures as seen in Reactive Handovers but relies on accurate predictions. Prediction misses could instead lead to a much larger amount of unnecessary handovers, some of which may be classified as Ping Pong Handovers.  Many Predictive Handovers utilise UE movement speed to estimate when to initiate a handover. However, many now leverage machine learning algorithms to predict the need for handover. This requires accurate historical data and real-time analysis for prediction, and signal processing techniques are incorporated to analyze patterns and predict future signal degradation.
+\subsubsection*{Predictive Handover} Predictive handover instead attempts to predict when signal quality is about to drop and initiates handover before the signal quality drops below a certain threshold. It aims to minimize disruption and enhance the user experience by anticipating network conditions \cite{al-quraan_enhancing_2023}. This avoids Handover Failures as seen in Reactive Handovers but relies on accurate predictions. Prediction misses could instead lead to more unnecessary handovers, some of which may be classified as Ping Pong Handovers \textcolor{orange}{is Ping Pong handover already explain, if not explain it. Several handovers between two eNBs}.  Many Predictive Handovers utilise UE movement speed to estimate when to initiate a handover. However, many now leverage machine learning algorithms to predict the need for handover. This requires accurate historical data and real-time analysis for prediction, and signal processing techniques are incorporated to analyze patterns and predict future signal degradation.
 
-\subsubsection*{This Paper} While we aim to initially examine the performance of reactive handovers in indoor environments, we wish to examine the feasibility of introducing a Predictive Handover algorithm, however this may be beyond the scope of this paper, and so we instead lay the groundwork for future research in this area.
+\textcolor{orange}{I think the paragraph below needs to be on the discussion. This section is to provide what is needed to understand handover and related works. }
+
+\subsubsection*{This Paper} While we aim to examine the performance of reactive handovers in indoor environments initially, we wish to examine the feasibility of introducing a Predictive Handover algorithm. However, this may be beyond this paper's scope, so we instead lay the groundwork for future research in this area. 
 
 \subsection{Large Scale Emulators}
-We can fully simulate network environments in software; however, this is limited in its ability to extract useful insights for new environments. There is an alternative, however, in the form of large-scale network emulators, the largest of which are the Platforms for Advanced Wireless Research (PAWR). These do not rely on software simulation but consist of real-world software-defined radio testbeds. Specifically, their POWDER platform is a city-wide testbed in Utah in the United States. 
+We can fully simulate network environments in software; however, this is limited in its ability to extract valuable insights for new environments. There is an alternative, however, in the form of large-scale network emulators, the largest of which are the Platforms for Advanced Wireless Research (PAWR). These do not rely on software simulation but consist of real-world software-defined radio testbeds. Specifically, their POWDER platform is a city-wide testbed in Utah, United States. 
 
-POWDER allows researchers to run experiments without maintaining and deploying networks themselves. This removes many barriers to entry in the research of 4G/5G networks, as the costs of equipment can be fairly high. It also enables researchers to test machine learning models for predictive handover and assess signal processing algorithms in a controlled environment.   \cite{Rusca2023MobileRF}.
+POWDER allows researchers to run experiments without maintaining and deploying networks themselves. This removes many barriers to entry in the research of 4G/5G networks, as equipment costs can be high. It also enables researchers to test machine learning models for predictive handover and assess signal processing algorithms in a controlled environment \cite{rusca_mobile_2023}.
 
-For this paper, POWDER was not used as the group already had a working testbed; however, this remains a viable route for larger-scale experiments for an extension to this project. Furthermore, while the scale of POWDER is very large, provision for indoor handover scenarios is not very high.
+For this paper, POWDER was not used as the group already had a working testbed; however, this remains a viable route for larger-scale experiments for an extension to this project. Furthermore, while the scale of POWDER is very large, provision for indoor handover scenarios is not very high. \textcolor{orange}{I think POWDER does not support mobility experiments, that is what we need}
 
 \subsection{O-RAN}
-Open Radio Access Network (O-RAN) architecture is a new standard of network organisation that promotes interoperability and flexibility in 5G networks. It defines standardised interfaces (E2) for modular radio network components to communicate over and includes the RAN Intelligent Controller (RIC), a software-defined component responsible for controlling and optimising RAN functions [https://www.juniper.net/gb/en/research-topics/what-is-ric.html]. \todo{extract this into citation}
+Open Radio Access Network (O-RAN) architecture is a new standard of network organisation \textcolor{orange}{architecture} that promotes interoperability and flexibility in 5G networks. It defines standardised interfaces (E2) for modular radio network components to communicate over and includes the RAN Intelligent Controller (RIC), a software-defined component responsible for controlling and optimising RAN functions \citep{juniper_networks_uki_what_2022}. 
 
-This enables the integration of machine learning directly into the radio access network for smarter handover decisions and innovation and customization in handover strategies by allowing third-party applications and services within the RAN  \cite{Niknam2020IntelligentORAN}. 
-\todo{clean up this section, and make it relatable to the rest of the paper}
+This enables the integration of machine learning directly into the radio access network for smarter handover decisions and innovation and customization in handover strategies by allowing third-party applications and services within the RAN  \cite{niknam_intelligent_2020}. 
 
-\tocomplete{Mention CQI in this section}
-\tocomplete{Mention Hard vs Soft Handover}
-
-% \bibitem{Rusca2023MobileRF}
-% R. Rusca, F. Raviglione, C. Casetti, P. Giaccone, F. Restuccia, "Mobile RF Scenario Design for Massive-Scale Wireless Channel Emulators," \emph{2023 Joint European Conference on Networks and Communications \& 6G Summit (EuCNC/6G Summit)}, 2023.
-
-% \bibitem{Niknam2020IntelligentORAN}
-% S. Niknam, A. Roy, H. S. Dhillon, S. Singh, R. Banerji, J. H. Reed, N. Saxena, S. Yoon, "Intelligent O-RAN for Beyond 5G and 6G Wireless Networks," \emph{2022 IEEE Globecom Workshops (GC Wkshps)}, 2020.
-
-
-% \bibitem{Kosmopoulos2022Handover}
-% I. Kosmopoulos, E. Skondras, A. Michalas, E. T. Michailidis, D. Vergados, "Handover Management in 5G Vehicular Networks," \emph{Future Internet}, vol. 14, no. 2, 2022. Available: https://doi.org/10.3390/fi14020049
-
-% \bibitem{Al-Quraan2023Enhancing}
-% M. M. Al-Quraan, A. Zoha, A. Centeno, H. Salameh, S. Muhaidat, M. Imran, L. S. Mohjazi, "Enhancing Reliability in Federated mmWave Networks: A Practical and Scalable Solution using Radar-Aided Dynamic Blockage Recognition," \emph{arXiv.org}, 2023. Available: https://arxiv.org/abs/2301.05496
+% possible additions: CQI, hard/soft handover, S1/X2 handover
+% 6 pages, need to expand to maybe 7?
 

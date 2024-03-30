@@ -66,7 +66,7 @@ The total throughput will be lowered as a result of the frequent handovers.
 \end{itemize}
 
 
-\section{Research Lab Layout}
+\section{Research Lab Layout} \label{sec:research-lab-layout}
 The testbed used to run many of the experiments is set up in one of the labs used by the Edinburgh NetSys Group. It consists of a node cluster which hosts the network core, and 4 Intel NUCs \insertref, each connected to an Ettus Research B210 USRP \insertref, which acts as the base stations. These USRPs are Software Defined Radios; this allows a network simulator to use them to send and receive radio signals with arbitrary coding schemes and frequencies, a key requirement for development and research testing.
 
 Below is a top-down view of the testbed used by the Edinburgh NetSys Group. Units are in centimetres, and the boxes with a cross through them represent the locations of the B210 USRPs. The door is on the left-hand side. The USRPs on the top of the image are on a shelf 127cm above the ground, and the 2 USRPs on the bottom of the image are on a desk 80cm above the ground.
@@ -78,8 +78,16 @@ Below is a top-down view of the testbed used by the Edinburgh NetSys Group. Unit
     \label{fig:appendix:testbed-drawing}
 \end{figure}
 
-\section{Software Stack}
+\section{Software Stack} \label{sec:research-software-stack}
 There are multiple software artefacts needed to run the testbed. To run the base stations, srsRAN's eNB code is used to control the USRPs that host the radio layer of the network. For (\todo{add reasons}), we use open5gs to run the network core, which is responsible for authenticating users, orchestrating the network and providing a control flow. A Kubernetes \insertref deployment is used to run all of these simultaneously, nominating the base stations and core network as pods and the physical NUCs and clusters as the nodes. The exact tools were used with generous permission from Jon Larrea [https://orcid.org/0000-0001-5736-2107], the author of the deployment tools.
+\begin{itemize}
+    \item The testbed consists of 4 NUCs, each connected to an Ettus Research B210 USRP. 
+    \item Each NUC runs a modified srsENB process, enabled with an E2 RIC interface to be oRAN compatible. 
+    \item Open5gs is running on another server and is connected using the S1 interface
+    \item The entire setup is orchestrated using KOperators \todo{find citation}, a Kubernetes deployment framework for ORAN.
+    \item We run an instance of srsRAN \textcolor{orange}{for the UE} on a separate machine we can move, connected to another B210 USRP.
+    \item The logs of the UE are saved to disk, with RRC logs set to DEBUG
+\end{itemize}
 
 \todo{Add a figure here maybe?}
 
