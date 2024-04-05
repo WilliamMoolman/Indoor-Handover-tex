@@ -2,20 +2,19 @@
 \label{chap:exploratoryResearchDesign}
 
 \section{Overview of Approach}
-Due to the iterative nature of exploratory work, this paper is not structured by methodology, results, and discussion but progresses iteratively. For our results to be meaningful and to progress in an efficient manner, the research of the paper is structured into multiple experimentation cycles. Each cycle is comprised of:
+Due to the iterative nature of exploratory work, this paper is not structured by methodology, results, and discussion but progresses iteratively. For our results to be meaningful and progress efficiently, the paper's research is structured into multiple experimentation cycles. Each cycle is comprised of:
 
 \begin{enumerate}
-    \item Determining Objective(s)
-    \item Defining Hypotheses
+    \item Determining Objective(s) and Defining Hypotheses
     \item Build Approach
     \item Present Results
     \item Immediate Discussion
 \end{enumerate}
 
-This structure allows for a more flexible approach to the research. It allows us to adapt as new insights are gained and form new hypotheses without compromising the experiment. This supports the dynamic nature of exploratory research, where learning and adaptation are key.
+This structure allows for a more flexible approach to the research. It allows us to adapt as new insights are gained and form new hypotheses without compromising the experiment. This supports the dynamic nature of exploratory research, where learning and adaptation are essential.
 
 \subsection*{Determining Objective(s)}
-The first step in each experimentation cycle is to clearly define what objective we are trying to achieve. This objective, or objectives, guide the research for the cycle, determining which hypotheses are chosen and how to approach the research. Objectives may be refined or adjusted as data is gathered and new insights are formed.
+The first step in each experimentation cycle is clearly defining what objective we are trying to achieve. This objective, or objectives, guide the research for the cycle, determining which hypotheses are chosen and how to approach the research. Objectives may be refined or adjusted as data is gathered and new insights are formed.
 
 \subsection*{Defining Hypotheses}
 As objectives are chosen, we can begin formulating hypotheses we aim to test or explore. We will test these predictions and provide a clear direction for the experimentation and analysis phases. Hypotheses should be specific and should not change as new data is gathered -- for that, we can note down the new questions that arise, which will inform the next research cycle.
@@ -27,38 +26,42 @@ With our objectives and hypotheses defined, this stage will focus on designing a
 This section presents all results from the experimentation and analysis of said data. The results should be detailed for clear analysis and focused on transparency and reproducibility to support the next discussion phase and future research.
 
 \subsection*{Immediate Discussion}
-This final phase is an immediate critical discussion of the derived results. The data provides insights and discusses the implications for the paper's wider research goals. These insights and results feed directly into the design of the next cycle, and the learning gained, in turn, informs how we structure the following objective and approach.
+This final phase is an immediate critical discussion of the derived results. The data provides insights and discusses the implications for the paper's broader research goals. These insights and results feed directly into the design of the next cycle, and the learning gained, in turn, informs how we structure the following objective and approach.
 
 
 \section{Initial Hypotheses}
-We wish to test four main hypotheses in this paper. We discuss the reason for their inclusion, what proving the hypotheses means regarding our research goals, and what contradicting them would indicate.
+In this paper, we aim to test four main hypotheses. We discuss the reason for their inclusion, what proving the hypotheses means regarding our research goals, and what contradicting them would indicate.
 
-\subsection{Ping Pong Handover Prevalence}
-Ping Pong Handover will be much more prevalent due to the denser configuration of indoor networks.
+% \textcolor{orange}{I would include first RSRP stability, then ping pong handover, unnecessary handover and Throughput. If you introduce first the RSRP you are telling the reader that RSRP changes quickly and might produce ping pong handover. }
+
+\subsection{RSRP will be unstable}
+RSRP values will be less stable due to a more dynamic environment induced by the movement of persons and greater signal reflection from walls, doors, and obstacles.
+\begin{itemize}
+    \item \textbf{Expectation:} Fluctuations in RSRP (Reference Signal Received Power) greater than expected due to the aforementioned reasons. We expect these to arise from the more constrained environment, providing greater signal reflection and the higher likelihood of LOS blockage due to the lower relative transmitter height.
+    \item \textbf{Implication:} Unstable RSRP values may necessitate adjustments in network configuration and signal optimization strategies to ensure consistent user experience. Care must be taken regarding possibly dampening signal gain.
+    \item \textbf{Consideration:} If RSRP values are more stable than expected, it could point towards an inherent robustness in the network's design against indoor environmental variables. Signal reflections could be overstated, and LOS blockage may not play a large role in lower-frequency transmission.
+\end{itemize}
+
+\subsection{Ping Pong Handover will be prevalent}
+Ping Pong Handover will be much more prevalent due to the denser configuration of indoor networks and the nature of the indoor channel, which produces rapid changes in signal quality.
 \begin{itemize}
     \item \textbf{Expectation:} Increased Ping Pong Handovers are anticipated due to the closer proximity of access points and the resulting signal overlap. Small signal fluctuations could result in a handover to a neighbour cell and then immediately back again.
     \item \textbf{Implication:} A higher incidence of Ping Pong Handovers could indicate a need for more careful tuning of handover parameters or even more sophisticated handover algorithms tailored to dense environments - such as a Machine Learning based one.
     \item \textbf{Consideration:} Contradicting this hypothesis may suggest existing handover mechanisms are more effective in dense configurations than anticipated or that signal management techniques are mitigating expected issues.
 \end{itemize}
 
-\subsection{RSRP Stability}
-RSRP values will be less stable due to a more dynamic environment induced by the movement of persons and greater signal reflection from walls, doors, and obstacles.
-\begin{itemize}
-    \item \textbf{Expectation:} Fluctuations in RSRP (Reference Signal Received Power) greater than expected (see \insertref) due to the aforementioned reasons. We expect these to arise from the more constrained environment providing greater signal reflection and the higher likelihood of LOS blockage due to the lower relative transmitter height.
-    \item \textbf{Implication:} Unstable RSRP values may necessitate adjustments in network planning and signal optimization strategies to ensure consistent user experience. Care must be taken regarding possibly dampening signal gain.
-    \item \textbf{Consideration:} If RSRP values are found to be more stable than expected, it could point towards an inherent robustness in the network's design against indoor environmental variables. Signal reflections could be overstated, and LOS blockage may not play a large role in lower-frequency transmission.
-\end{itemize}
 
-\subsection{Unnecessary Handovers}
-The number of unnecessary handovers will be very high - independent of the change in CQI and level of throughput. Unnecessary handovers are defined as those that do not improve user experience and partially overlap with the Ping Pong metric.
+
+\subsection{Unnecessary Handovers will dominate}
+The number of unnecessary handovers will be very high - independent of the change in QoS/QoE and level of throughput. Unnecessary handovers are defined as those that do not improve user experience and partially overlap with the Ping Pong metric.
 \begin{itemize}
     \item \textbf{Expectation:} A significant volume of handovers may occur without corresponding benefits regarding improved signal quality or throughput, indicating inefficiencies in the handover process.
     \item \textbf{Implication:} High rates of unnecessary handovers could lead to network resource wastage and degraded user experiences, highlighting areas for optimization.
     \item \textbf{Consideration:} Should this hypothesis be contradicted, it might reveal that current handover criteria are more effective than predicted at minimizing unnecessary transitions.
 \end{itemize}
 
-\subsection{Impact on Total Throughput}
-The total throughput will be lowered as a result of the frequent handovers.
+\subsection{Impact on Total Throughput and End-to-End Latency will be high}
+The total throughput will be lowered due to the frequent handovers, and each handover will exhibit high latency penalties.
 \begin{itemize}
     \item \textbf{Expectation:} Frequent handovers are presumed to disrupt data flows, thereby reducing the overall network throughput.
     \item \textbf{Implication:} A drop in throughput due to handovers suggests a need for balancing handover triggers with throughput preservation, possibly by refining handover algorithms.
@@ -67,9 +70,9 @@ The total throughput will be lowered as a result of the frequent handovers.
 
 
 \section{Research Lab Layout} \label{sec:research-lab-layout}
-The testbed used to run many of the experiments is set up in one of the labs used by the Edinburgh NetSys Group. It consists of a node cluster which hosts the network core, and 4 Intel NUCs \insertref, each connected to an Ettus Research B210 USRP \insertref, which acts as the base stations. These USRPs are Software Defined Radios; this allows a network simulator to use them to send and receive radio signals with arbitrary coding schemes and frequencies, a key requirement for development and research testing.
+The testbed used to run the experiments is set up in one of the labs used by the Edinburgh NetSys Group. It consists of a node cluster, which hosts the network core, and four Intel NUCs, each connected to an Ettus Research B210 USRP, which acts as the base stations. These USRPs are Software-Defined Radios that act as radio front ends, allowing a network simulator to use them to send and receive radio signals at a specific frequency.
 
-Below is a top-down view of the testbed used by the Edinburgh NetSys Group. Units are in centimetres, and the boxes with a cross through them represent the locations of the B210 USRPs. The door is on the left-hand side. The USRPs on the top of the image are on a shelf 127cm above the ground, and the 2 USRPs on the bottom of the image are on a desk 80cm above the ground.
+Below is a top-down view of the testbed used by the Edinburgh NetSys Group. Units are in centimetres, and the boxes with a cross through them represent the locations of the B210 USRPs. The USRPs on the top of the image are on a shelf 127cm above the ground, and the 2 USRPs on the bottom are on a desk 80cm above the ground.
 
 \begin{figure}[!h]
     \centering
@@ -79,21 +82,15 @@ Below is a top-down view of the testbed used by the Edinburgh NetSys Group. Unit
 \end{figure}
 
 \section{Software Stack} \label{sec:research-software-stack}
-There are multiple software artefacts needed to run the testbed. To run the base stations, srsRAN's eNB code is used to control the USRPs that host the radio layer of the network. For (\todo{add reasons}), we use open5gs to run the network core, which is responsible for authenticating users, orchestrating the network and providing a control flow. A Kubernetes \insertref deployment is used to run all of these simultaneously, nominating the base stations and core network as pods and the physical NUCs and clusters as the nodes. The exact tools were used with generous permission from Jon Larrea [https://orcid.org/0000-0001-5736-2107], the author of the deployment tools.
+There are multiple software artefacts needed to run the testbed. To run the base stations, srsRAN's eNB code controls the USRPs that host the radio layer of the network. Due to its ease of deployment and high compatibility with srsRAN, we use Open5GS to run the network core, which is responsible for authenticating users, orchestrating the network and providing a control flow. A Kubernetes deployment runs all these simultaneously, nominating the base stations and core network as pods and the physical NUCs and clusters as the nodes.
+
+
 \begin{itemize}
     \item The testbed consists of 4 NUCs, each connected to an Ettus Research B210 USRP. 
-    \item Each NUC runs a modified srsENB process, enabled with an E2 RIC interface to be oRAN compatible. 
-    \item Open5gs is running on another server and is connected using the S1 interface
-    \item The entire setup is orchestrated using KOperators \todo{find citation}, a Kubernetes deployment framework for ORAN.
-    \item We run an instance of srsRAN \textcolor{orange}{for the UE} on a separate machine we can move, connected to another B210 USRP.
+    \item Each NUC runs a modified srsENB process, enabled with an E2 RIC interface to be ORAN compatible. 
+    \item Open5GS is running on another server and is connected using the S1 interface
+    \item The entire setup is orchestrated using an in-house Kubernetes deployment framework for ORAN.
+    \item We run an instance of srsRAN for the UE on a separate machine we can move, connected to another B210 USRP.
     \item The logs of the UE are saved to disk, with RRC logs set to DEBUG
 \end{itemize}
 
-\todo{Add a figure here maybe?}
-
-\section{UE setup}
-\tocomplete{Finish UE setup}
-\begin{itemize}
-    \item The phone
-    \item The laptop
-\end{itemize}

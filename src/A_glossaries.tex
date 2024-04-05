@@ -1,11 +1,14 @@
-\chapter{Glossary}
+
 \newcommand{\acronym}[2]{\newacronym[sort=#1]{#1}{#1}{#2}}
+\newcommand{\nge}[2]{
+    \newglossaryentry{#1}{
+        name=#1,
+        description={#2}
+    }
+}
 
-\textcolor{orange}{eNB refers to LTE which surprisingly 4G and LTE are not the same protocol \url{https://www.uctel.co.uk/blog/4g-vs-lte-understanding-the-difference-between-4g-and-lte}. enB means evolved Node B (eNB)- LTE base station.
-next-generation Node B (gNB)
-User Equipment (UE)}
-
-\acronym{eNB}{A 4G base station, a radio transceiver that provides the radio connection to the UE}
+\acronym{eNB}{An LTE base station, a radio transceiver that provides the radio connection to the UE}
+\acronym{BS}{Base station, a radio transceiver that provides the radio connection to the UE}
 \acronym{UE}{Any mobile device that can connect to the mobile network as a client}
 \acronym{LOS}{Line of Sight}
 \acronym{gNB}{A 5G base station}
@@ -14,11 +17,72 @@ User Equipment (UE)}
 \acronym{HOF}{Handover Failure}
 \acronym{HO}{Handover}
 \acronym{RSRP}{Reference Signal Receiver Power - a measure of signal quality}
+\acronym{TTT}{Time to Trigger}
+\acronym{HetNets}{Heterogeneous Networks (macro and micro cells)}
 \acronym{SINR}{Signal-to-Interference-plus-Noise Ratio}
 \acronym{RSRQ}{Reference Signal Receiver Quality - a measure of signal quality}
 \acronym{CQI}{Channel Quality Indicator}
 \acronym{PCI}{Physical Cell Index - a value representing a physical cell}
+\acronym{QoS}{Quality of Service}
+\acronym{QoE}{Quality of Experience}
+\acronym{EPC}{Evolved Packet Core - an LTE network core}
+\acronym{LTE}{Long Term Evolution}
+\acronym{UDP}{User Datagram Protocol}
+\acronym{TCP}{Transmission Control Protocol}
+\acronym{S1AP}{S1 Application Protocol}
+\acronym{ICMP}{Internet Control Message Protocol}
+\acronym{RTT}{Return Trip Time}
+\acronym{ORAN}{Open Radio Access Network}
+
+
+\nge{Handover}{The process of transferring an ongoing call or data session from one cell of the network to another as the user moves through the coverage area.}
+
+\nge{Signal Strength}{A measure of the power level that an RF device, such as a wireless router or a mobile phone, receives from the signal source.}
+
+\nge{Propagation Loss}{The attenuation of signal strength that occurs as an electromagnetic wave propagates through space or a medium.}
+
+\nge{Network Core}{The central part of a telecommunications network that provides various services to customers who are connected by the access network.}
+
+\nge{Ping Pong Effect}{In wireless networks, a situation where a mobile device continuously switches between two base stations due to marginal differences in signal strength, causing inefficient use of network resources.}
+
+\nge{Radio Access Network}{Part of a mobile telecommunication system. It implements a radio access technology. Conceptually, it resides between a device (such as a mobile phone, a computer, or any remotely controlled machine) and provides connection with its core network.}
+
+\nge{Signal-to-Noise Ratio}{A measure used in science and engineering to quantify how much a signal has been corrupted by noise. It is defined as the ratio of signal power to the noise power and is often expressed in decibels.}
+
+\nge{Throughput}{The rate of successful message delivery over a communication channel. This data may be delivered over a physical or logical link, or it can pass through a certain network node.}
+
+\nge{Latency}{The delay from the source sending a packet of data to the destination receiving it. Latency is measured in milliseconds and can be affected by various factors in the network.}
+
+\nge{Path Loss Model}{A mathematical model that predicts the path loss (attenuation of signal strength) as a function of distance and other conditions. Used to design and plan wireless communication systems.}
+
+\nge{Base Station}{A fixed point of communication within a mobile network that communicates with mobile devices. It serves as a hub for connections to the wider network and manages radio communications.}
+
+\nge{User Equipment Mobility}{Refers to the movement of the user equipment (such as smartphones or tablets) and its ability to maintain a continuous connection and service quality as it moves across different base stations or cell areas in a mobile network.}
+
+\nge{Network Simulation}{The act of using a computer model to predict the performance of a network in order to understand how it behaves under different conditions.}
+
+\nge{Software Defined Radio}{A radio communication system where components that have been typically implemented in hardware (e.g., mixers, filters, amplifiers, modulators/demodulators) are instead implemented by means of software on a personal computer or embedded system.}
+
+\nge{Radio Frequency}{The rate of oscillation within the range of about 3 kHz to 300 GHz, which corresponds to the frequency of radio waves, and the alternating currents which carry radio signals.}
+
+\nge{Signal Reflection}{The phenomenon of a propagating electromagnetic wave (signal) bouncing off a surface. In telecommunications, reflections may cause multipath propagation, leading to interference.}
+
+\nge{Channel Quality}{A measure of the performance of a communication channel, reflecting its capacity to convey signals without error. It is influenced by factors like signal strength, interference, and noise.}
+
+\nge{Multipath Propagation}{The phenomenon that occurs when a wireless signal splits into multiple paths as it encounters obstructions like buildings or terrain, leading to multiple copies of the signal arriving at the receiver at slightly different times.}
+
+\nge{Signal Attenuation}{The reduction in strength of a signal as it travels through a medium or across distance, often due to loss factors such as absorption, reflection, and scattering.}
+\nge{Quality of Service Management}{The process of prioritizing network traffic and ensuring that critical data receives the bandwidth it requires to maintain high-quality transmission, especially in networks supporting diverse applications and services.}
+\nge{Network Density}{Refers to the number of nodes (base stations, access points) within a given area in a network, affecting the network's capacity and performance, especially in densely populated urban areas or indoor environments.}
+\nge{Latency Reduction}{Efforts or technologies aimed at decreasing the time it takes for a data packet to travel from source to destination, critical for applications requiring real-time interaction.}
 
 \glsaddall
+
+% \renewcommand{\addtermsection}[2][]{}
+% \renewcommand{\glossarymark}[1]{}
 \renewcommand{\glossarysection}[2][]{}
+\chapter{Glossary}
+\printglossary
+\chapter{Acronyms}
 \printglossary[type=\acronymtype]
+

@@ -1,11 +1,29 @@
-% UG project example file, February 2022
-% Do not change the first two lines of code, except you may delete "logo," if causing problems.
-% Understand any problems and seek approval before assuming it's ok to remove ugcheck.
 \RequirePackage{silence}
 \WarningFilter{latex}{Command \under}
+\WarningFilter{microtype}{Unable to apply}
+\WarningFilter{todonotes}{The length}
+\WarningFilter{latex}{Marginpar on page}
+
 \documentclass[logo,bsc,singlespacing,parskip]{infthesis}
+
+% ================ FINAL?? ==================== %
+\newif\iffinal
+\finaltrue
+% \finalfalse
+% ================ ??FINAL ==================== %
+
+\iffinal
+    \newcommand*{\ab}{\textcolor{black}}
+    \newcommand*{\will}{\textcolor{black}}
+    \PassOptionsToPackage{obeyDraft}{todonotes}
+\else
+    \newcommand*{\ab}{\textcolor{orange}}
+    \newcommand*{\will}{\textcolor{green}}
+\fi
+
 \usepackage[colorinlistoftodos]{todonotes}
 \todostyle{red}{color=red,shadow}
+
 \usepackage{hyperref}
 \usepackage{amsmath}
 \usepackage{subcaption}
@@ -13,28 +31,19 @@
 \usepackage{ugcheck}
 % \usepackage{draftwatermark}
 % \usepackage[hyphens]{url}
-% \usepackage{silence}
 \usepackage{enumitem}
-
-
-% \usepackage[automake]{glossaries-extra}
-\WarningFilter{microtype}{Unable to apply}
-\WarningFilter{todonotes}{The length}
-\WarningFilter{latex}{Marginpar on page}
- % :0
-\usepackage{microtype} % recommended, but you can remove if it causes problems
+\usepackage{booktabs}
+\usepackage{microtype}
 \usepackage[square,numbers]{natbib}
 \usepackage{graphicx}
 \usepackage{wrapfig}
-
-\newcommand*{\ab}{\textcolor{orange}}
-\newcommand{\insertref}{\todo[color=green!40,size=\small, inlinewidth=0.5cm,inline, noinlinepar]{?}}
-\newcommand{\tocomplete}[1]{\todo[color=blue!40]{#1}}
 \usepackage{soul}
 
 \usepackage[acronym,nonumberlist]{glossaries}
 \makeglossaries
 
+\newcommand{\insertref}{\todo[color=green!40,size=\small, inlinewidth=0.5cm,inline, noinlinepar]{?}}
+\newcommand{\tocomplete}[1]{\todo[color=blue!40]{#1}}
 
 \begin{document}
 
@@ -52,36 +61,16 @@
 
 \include{src/6_conclusions}
 
-\listoftodos
+\iffinal
+\else
+    \listoftodos
+\fi
 
 \bibliographystyle{abbrvnat}
-
-% \bibliographystyle{plain}
 \bibliography{references}
 
-
-% You may delete everything from \appendix up to \end{document} if you don't need it.
 \appendix
 
 \include{src/A_glossaries}
 
-% \printglossaries
-
-
 \end{document}
-
-%%%%%%%%%%%%%%%%%%% NOTES %%%%%%%%%%%%%%%%%%%%%%%%%
-You can use the following rough page count estimate to distribute content across a 40-page dissertation while ensuring each section is adequately addressed. This distribution considers the typical depth and detail required for each section in a comprehensive study like yours on "Understanding 5G Handover through Machine Learning and Signal Processing."
-
-[3] Introduction (3-4 pages): Introduce the topic and outline the study's research gap, objectives, and significance. Given the topic's complexity, enough space is needed to set the stage for your research.
-
-[6] Background (5-6 pages): Provide a detailed literature review and theoretical framework for 5G, handover processes, machine learning, and signal processing. This section establishes the foundation for your research.
-
-[5] Exploratory Research Design (5-6 pages): Describe the methodology in detail, including the design of your exploratory research, the selection of machine learning models, data collection methods, and the rationale behind your choices. This section must be thorough to ensure the validity and reliability of your research.
-
-[14] Experimentation (20 pages): Detail the experimental setup, the implementation of machine learning techniques, the processing of signal data, and the analysis performed. Given that this is the core of your research, it should be the most detailed, comprehensively documenting your experiments and initial findings.
-
-[4] Discussion (6-7 pages): Present the results of your experiments, interpret the data, and discuss how your findings address the research questions or hypotheses. This section synthesizes the data collected with the literature reviewed to draw meaningful conclusions about indoor handover processes.
-
-
-[2] Conclusions (2-3 pages): Summarize the key findings of your research, its limitations, and the practical implications for 5G network development and optimization. This section concisely encapsulates the essence and impact of your study.
